@@ -21,9 +21,11 @@ if user_input:
     message(user_input, is_user=True)
 
     #first add message to message history
-    #AI response
-    response = Chatbot.invoke({"messages": [HumanMessage(content=user_input)]}, config = config)
-    Ai_message = response['messages'][-1].content
-    
+    Ai_message = st.write_stream(
+        message_chunk.content for message_chunk, metadata in Chatbot.stream(
+            {"messages":[HumanMessage(content=user_input)]},
+            config = {'configurable':{'thread_id':'thread_1'}},
+            stream_mode='messages'
+        )
+    )
     st.session_state['message_history'].append({'is_user':False,'content': Ai_message})
-    message(Ai_message)
