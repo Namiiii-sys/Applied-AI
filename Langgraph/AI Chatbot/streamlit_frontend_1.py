@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
-from Basic_chatbot import Chatbot
+from Chatbot_backend import Chatbot
 from langchain_core.messages import BaseMessage, HumanMessage
 import uuid
 
